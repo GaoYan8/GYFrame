@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mMenuIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRightTopMenu.showAsDropDown(mMenuIV, 0, 40);
+                mRightTopMenu.showAsDropDown(mMenuIV, -380, 40);
             }
         });
 
