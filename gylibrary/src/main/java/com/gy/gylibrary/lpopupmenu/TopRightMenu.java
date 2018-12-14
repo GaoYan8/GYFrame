@@ -172,18 +172,28 @@ public class TopRightMenu {
 
         public Builder(Activity activity) {
             mActivity = activity;
-            mMenuItems = new ArrayList<>();
         }
 
         public TopRightMenu.Builder addMenuList(List<MenuItem> menuItemList) {
-            if (null != menuItemList && menuItemList.size() > 0) {
-                this.mMenuItems.addAll(menuItemList);
+            if (null == this.mMenuItems) {
+                if (null != menuItemList) {
+                    this.mMenuItems = menuItemList;
+                }
+            } else {
+                if (null != menuItemList) {
+                    menuItemList.addAll(0,this.mMenuItems);
+                    this.mMenuItems.clear();
+                    this.mMenuItems.addAll(menuItemList);
+                }
             }
             return this;
         }
 
         public TopRightMenu.Builder addMenuItem(MenuItem menuItem) {
             if (null != menuItem) {
+                if (null == this.mMenuItems) {
+                    this.mMenuItems = new ArrayList<>();
+                }
                 this.mMenuItems.add(menuItem);
             }
             return this;
@@ -225,6 +235,7 @@ public class TopRightMenu {
 
         /**
          * 是否显示列表分割线
+         *
          * @param showDividingLine
          * @return
          */
@@ -238,7 +249,8 @@ public class TopRightMenu {
             return this;
         }
 
-        public TopRightMenu.Builder onMenuItemClickListener(OnMenuItemClickListener onMenuItemClickListener) {
+        public TopRightMenu.Builder onMenuItemClickListener(OnMenuItemClickListener
+                                                                    onMenuItemClickListener) {
             mOnMenuItemClickListener = onMenuItemClickListener;
             return this;
         }

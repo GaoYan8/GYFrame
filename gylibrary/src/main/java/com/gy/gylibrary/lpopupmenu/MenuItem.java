@@ -6,11 +6,13 @@ package com.gy.gylibrary.lpopupmenu;
  * @create 2018/12/13
  * @Describe
  */
-public class MenuItem {
+public class MenuItem<T> {
     private int icon;
     private boolean showIcon;
     private String text;
     private int badgeCount;
+
+    private T obj;
 
     public MenuItem(int icon, String text) {
         this.icon = icon;
@@ -35,6 +37,28 @@ public class MenuItem {
         this.text = text;
         this.badgeCount = badgeCount;
     }
+
+
+    public MenuItem(int icon, String text, T obj) {
+        this(icon, text);
+        this.obj = obj;
+    }
+
+    public MenuItem(int icon, boolean showIcon, String text, T obj) {
+       this(icon, showIcon, text);
+        this.obj = obj;
+    }
+
+    public MenuItem(int icon, String text, int badgeCount, T obj) {
+        this(icon, text, badgeCount);
+        this.obj = obj;
+    }
+
+    public MenuItem(int icon, boolean showIcon, String text, int badgeCount, T obj) {
+        this(icon, showIcon, text, badgeCount);
+        this.obj = obj;
+    }
+
 
     public int getIcon() {
         return icon;
@@ -66,5 +90,13 @@ public class MenuItem {
 
     public void setBadgeCount(int badgeCount) {
         this.badgeCount = badgeCount;
+    }
+
+    public T getObj() {
+        return obj;
+    }
+
+    public void setObj(T obj) {
+        this.obj = obj;
     }
 }

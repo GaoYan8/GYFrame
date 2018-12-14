@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mMenuIV;
     private TopRightMenu mRightTopMenu;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +32,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem(0, "2016年11月"));
-        menuItems.add(new MenuItem(0, "2016年11月"));
-        menuItems.add(new MenuItem(0, "2016年11月"));
+
+        AC ac = new AC();
+        ac.setI(1);
+        ac.setName("ac");
+
+        AC ac1 = new AC();
+        ac1.setI(2);
+        ac1.setName("ac1");
+
+        AC ac2 = new AC();
+        ac2.setI(2);
+        ac2.setName("ac2");
+        final List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem(0, "2016年10月", ac));
+        menuItems.add(new MenuItem(0, "2016年19月", ac1));
+        menuItems.add(new MenuItem(0, "2016年18月", ac2));
 
         if (mRightTopMenu == null) {
             mRightTopMenu = new TopRightMenu.Builder(MainActivity.this)
@@ -44,13 +57,16 @@ public class MainActivity extends AppCompatActivity {
                     .needAnimationStyle(true)   //显示动画，默认为true
                     .animationStyle(R.style.RTM_ANIM_STYLE)  //默认为R.style.RTM_ANIM_STYLE
                     .addMenuList(menuItems)
-                    .addMenuItem(new MenuItem(0, "2016年10月"))
+                    .addMenuItem(new MenuItem(0, "2016年1"))
+
                     .setGravity(Gravity.CENTER)
                     .setShowDividingLine(true)
                     .onMenuItemClickListener(new TopRightMenu.OnMenuItemClickListener() {
                         @Override
                         public void onMenuItemClick(View view, int position) {
-                            Toast.makeText(MainActivity.this, "点击菜单:" + position, Toast.LENGTH_SHORT).show();
+                            MenuItem aaa = menuItems.get(position);
+
+                            Toast.makeText(MainActivity.this, aaa.getObj() + "   点击菜单:" + position, Toast.LENGTH_SHORT).show();
                         }
                     }).build();
         }
