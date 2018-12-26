@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 右侧弹出菜单
+ *
  * @author 高炎
  * @email yan.gao@zarltech.com
  * @create 2018/12/13
