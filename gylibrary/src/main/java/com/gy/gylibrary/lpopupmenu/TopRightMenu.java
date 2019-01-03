@@ -156,7 +156,7 @@ public class TopRightMenu {
     private OnMenuItemClickListener mOnMenuItemClickListener;
 
     public interface OnMenuItemClickListener {
-        void onMenuItemClick(View view, int position);
+        void onMenuItemClick(View view, List<MenuItem> menuItems, int position);
     }
 
 
@@ -183,7 +183,7 @@ public class TopRightMenu {
                 }
             } else {
                 if (null != menuItemList) {
-                    menuItemList.addAll(0,this.mMenuItems);
+                    menuItemList.addAll(0, this.mMenuItems);
                     this.mMenuItems.clear();
                     this.mMenuItems.addAll(menuItemList);
                 }

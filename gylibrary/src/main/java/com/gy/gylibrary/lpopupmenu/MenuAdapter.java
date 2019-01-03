@@ -92,7 +92,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             public void onClick(View view) {
                 if (mOnMenuItemClickListener != null) {
                     mRightTopMenu.dismiss();
-                    mOnMenuItemClickListener.onMenuItemClick(view, position);
+                    mOnMenuItemClickListener.onMenuItemClick(view, mMenuItemList, position);
                 }
             }
         });
