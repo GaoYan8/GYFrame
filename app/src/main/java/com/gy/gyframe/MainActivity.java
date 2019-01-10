@@ -6,24 +6,31 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.gy.gylibrary.image.ImageLoaderUtils;
 import com.gy.gylibrary.lpopupmenu.MenuItem;
 import com.gy.gylibrary.lpopupmenu.TopRightMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mMenuIV;
     private TopRightMenu mRightTopMenu;
+
+    @BindView(R.id.iv_img)
+    ImageView iv_img;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         mMenuIV = findViewById(R.id.mMenuIV);
         mMenuIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 mRightTopMenu.showAsDropDown(mMenuIV, -380, 40);
             }
         });
+
+
+        ImageLoaderUtils.getInstance().displayUserHead(this,
+                "http://a.hiphotos.baidu.com/image/pic/item/9f510fb30f2442a7c9f10326dc43ad4bd01302b1.jpg",
+                iv_img);
 
 
         AC ac = new AC();
@@ -61,15 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
                     .setGravity(Gravity.CENTER)
                     .setShowDividingLine(true)
-                    .onMenuItemClickListener(new TopRightMenu.OnMenuItemClickListener() {
+                    /*.onMenuItemClickListener(new TopRightMenu.OnMenuItemClickListener() {
                         @Override
                         public void onMenuItemClick(View view, int position) {
                             MenuItem aaa = menuItems.get(position);
 
                             Toast.makeText(MainActivity.this, aaa.getObj() + "   点击菜单:" + position, Toast.LENGTH_SHORT).show();
                         }
-                    }).build();
+                    })*/.build();
         }
+
 
     }
 

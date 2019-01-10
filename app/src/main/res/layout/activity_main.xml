@@ -17,6 +17,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/iv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
 
     <com.gy.gylibrary.swipemenu.SwipeMenuLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
