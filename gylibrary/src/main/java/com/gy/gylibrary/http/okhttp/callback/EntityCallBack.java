@@ -3,7 +3,7 @@ package com.gy.gylibrary.http.okhttp.callback;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.zarltech.zarlspmis.frame.http.okhttp.utils.GenericUtil;
+import com.gy.gylibrary.http.okhttp.utils.GenericUtil;
 
 import okhttp3.Response;
 
