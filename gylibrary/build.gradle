@@ -13,7 +13,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.7"
+        versionName "1.0.8"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,5 +41,10 @@ dependencies {
     //图片
     implementation 'com.github.bumptech.glide:glide:4.5.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.0'
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
 }
