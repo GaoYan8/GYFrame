@@ -27,8 +27,10 @@ public class GYConfig {
      */
     public static boolean isDebug = true;
 
-
-    //文件初始化
+    /**
+     * 文件初始化
+     * @param mApplication
+     */
     public static void initFileDir(Application mApplication) {
         if (null != mApplication) {
             FileUtil.initFileDir(mApplication);
