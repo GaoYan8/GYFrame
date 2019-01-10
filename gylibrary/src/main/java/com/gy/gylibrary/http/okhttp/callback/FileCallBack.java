@@ -1,6 +1,7 @@
 package com.gy.gylibrary.http.okhttp.callback;
 
-import com.zarltech.zarlspmis.frame.http.okhttp.OkHttpUtils;
+
+import com.gy.gylibrary.http.okhttp.OkHttpUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

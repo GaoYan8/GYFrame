@@ -1,8 +1,9 @@
 package com.gy.gylibrary.http.okhttp.request;
 
-import com.zarltech.zarlspmis.frame.http.okhttp.OkHttpUtils;
-import com.zarltech.zarlspmis.frame.http.okhttp.callback.Callback;
-import com.zarltech.zarlspmis.frame.http.okhttp.utils.Exceptions;
+
+import com.gy.gylibrary.http.okhttp.OkHttpUtils;
+import com.gy.gylibrary.http.okhttp.callback.Callback;
+import com.gy.gylibrary.http.okhttp.utils.Exceptions;
 
 import java.io.File;
 import java.util.Map;
