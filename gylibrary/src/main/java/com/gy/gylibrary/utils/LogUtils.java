@@ -2,7 +2,8 @@ package com.gy.gylibrary.utils;
 
 import android.util.Log;
 
-import com.gy.gylibrary.BuildConfig;
+import com.gy.gylibrary.GYConfig;
+
 
 /**
  *
@@ -16,7 +17,7 @@ public class LogUtils {
     /**
      * 是否允许输出log
      */
-    private static boolean isDebug = BuildConfig.DEBUG;
+    private static boolean isDebug = GYConfig.isDebug;
     /**
      * 用于记时的变量
      */
