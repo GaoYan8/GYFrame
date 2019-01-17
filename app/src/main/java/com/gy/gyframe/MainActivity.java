@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.gy.gylibrary.image.ImageLoaderUtils;
 import com.gy.gylibrary.lpopupmenu.MenuItem;
 import com.gy.gylibrary.lpopupmenu.TopRightMenu;
+import com.gy.gylibrary.view.LARBAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+
+    //确认退出app
+    private LARBAlertDialog exitDialog;
 
     private TextView mMenuIV;
     private TopRightMenu mRightTopMenu;
@@ -35,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         mMenuIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRightTopMenu.showAsDropDown(mMenuIV, -380, 40);
+                //mRightTopMenu.showAsDropDown(mMenuIV, -380, 40);
+                exitDialog.show();
             }
         });
 
@@ -82,6 +87,20 @@ public class MainActivity extends AppCompatActivity {
                         }
                     })*/.build();
         }
+
+
+
+        exitDialog = new LARBAlertDialog(this).builder().setMsg("您确认要退出当前账号吗?")
+                .setPositiveButton("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                }).setNegativeButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                }).setTitleTextColor(0,0,R.color.colorAccent);
 
 
     }
