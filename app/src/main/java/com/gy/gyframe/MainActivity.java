@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                 requestPermission(Permission.CAMERA);
                 break;
-            case R.id.bt_qrCode:
+            case R.id.bt_qrCode: 
                 startActivity(new Intent(this, QRCodeActivity.class));
                 break;
         }
