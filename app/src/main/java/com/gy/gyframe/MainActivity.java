@@ -3,6 +3,8 @@ package com.gy.gyframe;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gy.gyframe.rationale.InstallRationale;
+import com.gy.gyframe.rationale.OverlayRationale;
+import com.gy.gyframe.rationale.RuntimeRationale;
 import com.gy.gylibrary.image.ImageLoaderUtils;
 import com.gy.gylibrary.lpopupmenu.MenuItem;
 import com.gy.gylibrary.lpopupmenu.TopRightMenu;
@@ -26,6 +31,7 @@ import com.gy.gylibrary.permission.RequestExecutor;
 import com.gy.gylibrary.permission.Setting;
 import com.gy.gylibrary.view.LARBAlertDialog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -233,5 +239,81 @@ public class MainActivity extends AppCompatActivity {
                 .start();
     }
 
+    /**
+     * Request to read and write external storage permissions.
+     */
+    private void requestPermissionForInstallPackage() {
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.Group.STORAGE)
+                .rationale(new RuntimeRationale())
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        new WriteApkTask(MainActivity.this, new Runnable() {
+                            @Override
+                            public void run() {
+                                installPackage();
+                            }
+                        }).execute();
+                    }
+                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        toast(R.string.message_install_failed);
+                    }
+                })
+                .start();
+    }
 
+    /**
+     * Install package.
+     */
+    private void installPackage() {
+        AndPermission.with(this)
+                .install()
+                .file(new File(Environment.getExternalStorageDirectory(), "android.apk"))
+                .rationale(new InstallRationale())
+                .onGranted(new Action<File>() {
+                    @Override
+                    public void onAction(File data) {
+                        // Installing.
+                    }
+                })
+                .onDenied(new Action<File>() {
+                    @Override
+                    public void onAction(File data) {
+                        // The user refused to install.
+                    }
+                })
+                .start();
+    }
+
+    private void requestPermissionForAlertWindow() {
+        AndPermission.with(this)
+                .overlay()
+                .rationale(new OverlayRationale())
+                .onGranted(new Action<Void>() {
+                    @Override
+                    public void onAction(Void data) {
+                        showAlertWindow();
+                    }
+                })
+                .onDenied(new Action<Void>() {
+                    @Override
+                    public void onAction(Void data) {
+                        toast(R.string.message_overlay_failed);
+                    }
+                })
+                .start();
+    }
+
+    private void showAlertWindow() {
+
+        Intent backHome = new Intent(Intent.ACTION_MAIN);
+        backHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        backHome.addCategory(Intent.CATEGORY_HOME);
+        startActivity(backHome);
+    }
 }
