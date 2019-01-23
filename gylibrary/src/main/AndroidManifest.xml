@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2019 Gao yan
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,9 +14,22 @@
     limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gy.gylibrary" >
+    package="com.gy.gylibrary">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application>
+        <!-- 权限 -->
         <activity
             android:name=".permission.PermissionActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -34,6 +46,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/permission_file_paths" />
         </provider>
+
+
+        <!-- 二维码扫描 -->
+        <activity
+            android:name=".zxing.qrcode.android.CaptureActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
     </application>
 
 </manifest>

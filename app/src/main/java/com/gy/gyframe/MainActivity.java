@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gy.gyframe.qrcode.QRCodeActivity;
 import com.gy.gyframe.rationale.InstallRationale;
 import com.gy.gyframe.rationale.OverlayRationale;
 import com.gy.gyframe.rationale.RuntimeRationale;
@@ -54,15 +55,21 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bt_quanxian)
     Button bt_quanxian;
 
+    @BindView(R.id.bt_qrCode)
+    Button bt_qrCode;
 
     @OnClick({
-            R.id.bt_quanxian
+            R.id.bt_quanxian,
+            R.id.bt_qrCode
     })
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.bt_quanxian:
 
                 requestPermission(Permission.CAMERA);
+                break;
+            case R.id.bt_qrCode:
+                startActivity(new Intent(this, QRCodeActivity.class));
                 break;
         }
     }
@@ -144,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
     /**

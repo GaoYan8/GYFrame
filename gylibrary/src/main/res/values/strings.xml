@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">GYLibrary</string>
 
+    <!--permissions-->
     <string name="permission_name_calendar">Calendar</string>
     <string name="permission_name_camera">Camera</string>
     <string name="permission_name_contacts">Contacts</string>
@@ -10,5 +11,15 @@
     <string name="permission_name_sensors">Body Sensors</string>
     <string name="permission_name_sms">SMS</string>
     <string name="permission_name_storage">Storage</string>
+
+
+
+
+
+    <!--zxing-->
+    <string name="msg_camera_framework_bug">相机被占用或没有相机权限，请检查</string>
+    <string name="button_ok">退出</string>
+    <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
+    <string name="viewfinderview_status_text2">即可自动扫描</string>
 
 </resources>
