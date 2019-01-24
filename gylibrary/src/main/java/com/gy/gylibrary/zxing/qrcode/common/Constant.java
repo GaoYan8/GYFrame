@@ -26,4 +26,10 @@ public class Constant {
     public static final String INTENT_ZXING_CONFIG = "zxingConfig";
 
 
+    /**
+     *  请求CODE
+     */
+    public final static int REQUEST_CODE_SCAN = 19921117;
+
+
 }

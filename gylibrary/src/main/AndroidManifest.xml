@@ -28,7 +28,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-    <application>
+    <application android:theme="@style/AppTheme">
         <!-- 权限 -->
         <activity
             android:name=".permission.PermissionActivity"
@@ -53,7 +53,6 @@
             android:name=".zxing.qrcode.android.CaptureActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
     </application>

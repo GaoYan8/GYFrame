@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +17,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ import java.io.IOException;
 public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.Callback, View.OnClickListener {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
+
     public ZxingConfig config;
     private SurfaceView previewView;
     private ViewfinderView viewfinderView;
@@ -58,6 +60,8 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
     private SurfaceHolder surfaceHolder;
+
+    private RelativeLayout rl_title_tar;
 
 
     public ViewfinderView getViewfinderView() {
@@ -81,22 +85,24 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // 保持Activity处于唤醒状态
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(Color.BLACK);
+
+        //设置沉浸式状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
+
 
         /*先获取配置信息*/
         try {
             config = (ZxingConfig) getIntent().getExtras().get(Constant.INTENT_ZXING_CONFIG);
         } catch (Exception e) {
-
             Log.i("config", e.toString());
         }
 
@@ -104,10 +110,7 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
             config = new ZxingConfig();
         }
 
-
         setContentView(R.layout.activity_capture);
-
-
         initView();
 
         hasSurface = false;
@@ -118,6 +121,16 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         beepManager.setVibrate(config.isShake());
 
 
+    }
+
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 
 
@@ -140,12 +153,18 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
         albumLayout = findViewById(R.id.albumLayout);
         albumLayout.setOnClickListener(this);
         bottomLayout = findViewById(R.id.bottomLayout);
-
+        rl_title_tar = findViewById(R.id.rl_title_tar);
 
         switchVisibility(bottomLayout, config.isShowbottomLayout());
         switchVisibility(flashLightLayout, config.isShowFlashLight());
         switchVisibility(albumLayout, config.isShowAlbum());
 
+        //设置状态栏高度
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(rl_title_tar.getLayoutParams());
+            lp.setMargins(0, getStatusBarHeight(), 0, 0);
+            rl_title_tar.setLayoutParams(lp);
+        }
 
         /*有闪光灯就显示手电筒按钮  否则不显示*/
         if (isSupportCameraLedFlash(getPackageManager())) {
@@ -275,7 +294,7 @@ public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.
     @Override
     protected void onPause() {
 
-        Log.i("CaptureActivity","onPause");
+        Log.i("CaptureActivity", "onPause");
         if (handler != null) {
             handler.quitSynchronously();
             handler = null;

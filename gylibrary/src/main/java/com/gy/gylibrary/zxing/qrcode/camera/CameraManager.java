@@ -255,10 +255,9 @@ public final class CameraManager {
 
             /*水平居中  偏上显示*/
             int leftOffset = (screenResolution.x - width) / 2;
-            int topOffset = (screenResolution.y - height) / 5;
+            int topOffset = (screenResolution.y - height) / 4;
 
-            framingRect = new Rect(leftOffset, topOffset, leftOffset + width,
-                    topOffset + height);
+            framingRect = new Rect(leftOffset-50, topOffset-50, leftOffset + width+50, topOffset + height+50);
             Log.d(TAG, "Calculated framing rect: " + framingRect);
         }
         return framingRect;

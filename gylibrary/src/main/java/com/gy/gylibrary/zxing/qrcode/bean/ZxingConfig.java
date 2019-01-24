@@ -16,7 +16,6 @@ import java.io.Serializable;
 
 public class ZxingConfig implements Serializable {
 
-
     /*是否播放声音*/
     private boolean isPlayBeep = true;
     /*是否震动*/

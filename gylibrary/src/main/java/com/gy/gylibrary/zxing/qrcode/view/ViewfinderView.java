@@ -114,7 +114,7 @@ public final class ViewfinderView extends View {
 
         /*扫描线画笔*/
         scanLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        scanLinePaint.setStrokeWidth(dp2px(2));
+        scanLinePaint.setStrokeWidth(dp2px(1));
         scanLinePaint.setStyle(Paint.Style.FILL);
         scanLinePaint.setDither(true);
         scanLinePaint.setColor(scanLineColor);
@@ -187,7 +187,7 @@ public final class ViewfinderView extends View {
             drawScanLight(canvas, frame);
 
             /*绘制闪动的点*/
-            // drawPoint(canvas, frame, previewFrame);
+             drawPoint(canvas, frame, previewFrame);
         }
     }
 
@@ -274,8 +274,7 @@ public final class ViewfinderView extends View {
 
         corWidth = corWidth > 15 ? 15 : corWidth;
 
-
-        /*角在线外*/
+        /*角在线外*//*
         // 左上角
         canvas.drawRect(frame.left - corWidth, frame.top, frame.left, frame.top
                 + corLength, reactPaint);
@@ -295,7 +294,24 @@ public final class ViewfinderView extends View {
         canvas.drawRect(frame.right, frame.bottom - corLength, frame.right
                 + corWidth, frame.bottom, reactPaint);
         canvas.drawRect(frame.right - corLength, frame.bottom, frame.right
-                + corWidth, frame.bottom + corWidth, reactPaint);
+                + corWidth, frame.bottom + corWidth, reactPaint);*/
+
+        /*角在线内*/
+        // 左上角
+        canvas.drawRect(frame.left + corWidth, frame.top, frame.left, frame.top + corLength+corWidth, reactPaint);
+        canvas.drawRect(frame.left + corWidth, frame.top + corWidth, frame.left + corLength+corWidth, frame.top, reactPaint);
+
+        // 右上角
+        canvas.drawRect(frame.right-corWidth, frame.top, frame.right , frame.top + corLength+corWidth, reactPaint);
+        canvas.drawRect(frame.right - corLength-corWidth, frame.top + corWidth, frame.right , frame.top, reactPaint);
+
+        // 左下角
+        canvas.drawRect(frame.left + corWidth, frame.bottom - corLength-corWidth, frame.left, frame.bottom, reactPaint);
+        canvas.drawRect(frame.left + corWidth, frame.bottom-corWidth, frame.left + corLength+corWidth, frame.bottom, reactPaint);
+
+        // 右下角
+        canvas.drawRect(frame.right, frame.bottom - corLength-corWidth, frame.right - corWidth, frame.bottom, reactPaint);
+        canvas.drawRect(frame.right - corLength-corWidth, frame.bottom-corWidth, frame.right , frame.bottom , reactPaint);
     }
 
 

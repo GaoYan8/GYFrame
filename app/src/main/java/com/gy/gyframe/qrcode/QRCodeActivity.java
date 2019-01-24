@@ -42,7 +42,6 @@ public class QRCodeActivity extends AppCompatActivity implements View.OnClickLis
     private Button encodeBtn;
     private ImageView contentIv;
     private Toolbar toolbar;
-    private int REQUEST_CODE_SCAN = 111;
     /**
      * 生成带logo的二维码
      */
@@ -114,15 +113,15 @@ public class QRCodeActivity extends AppCompatActivity implements View.OnClickLis
                                  * 也可以不传这个参数
                                  * */
                                 ZxingConfig config = new ZxingConfig();
-                                // config.setPlayBeep(false);//是否播放扫描声音 默认为true
-                                //  config.setShake(false);//是否震动  默认为true
+//                                 config.setPlayBeep(true);//是否播放扫描声音 默认为true
+//                                  config.setShake(false);//是否震动  默认为true
                                 // config.setDecodeBarCode(false);//是否扫描条形码 默认为true
 //                                config.setReactColor(R.color.colorAccent);//设置扫描框四个角的颜色 默认为白色
 //                                config.setFrameLineColor(R.color.colorAccent);//设置扫描框边框颜色 默认无色
-//                                config.setScanLineColor(R.color.colorAccent);//设置扫描线的颜色 默认白色
+                                config.setScanLineColor(R.color.white);//设置扫描线的颜色 默认白色
                                 config.setFullScreenScan(false);//是否全屏扫描  默认为true  设为false则只会在扫描框中扫描
                                 intent.putExtra(Constant.INTENT_ZXING_CONFIG, config);
-                                startActivityForResult(intent, REQUEST_CODE_SCAN);
+                                startActivityForResult(intent, Constant.REQUEST_CODE_SCAN);
                             }
                         })
                         .onDenied(new Action<List<String>>() {
@@ -180,7 +179,7 @@ public class QRCodeActivity extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
 
         // 扫描二维码/条码回传
-        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
+        if (requestCode == Constant.REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
             if (data != null) {
 
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
