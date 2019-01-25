@@ -124,11 +124,11 @@ public class AppManager {
     /**
      * 重新启动App -> 不杀进程,缓存的东西不清除,启动快
      */
-    public void restartApp2(Application application) {
-        if (null != application) {
-            final Intent intent = application.getPackageManager().getLaunchIntentForPackage(application.getPackageName());
+    public void restartApp2(Context context) {
+        if (null != context) {
+            final Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            application.startActivity(intent);
+            context.startActivity(intent);
         }
     }
 

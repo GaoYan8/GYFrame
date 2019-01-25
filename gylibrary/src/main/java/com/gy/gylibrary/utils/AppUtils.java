@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.FileProvider;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
@@ -28,6 +29,25 @@ public class AppUtils {
      * 最低版本设置
      */
     public static final int MINIMUM_VERSION_CODES = Build.VERSION_CODES.M;
+
+    /**
+     * 安装指定路径下的Apk
+     */
+    public static void install(Context mContext, File apkFile) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(
+                    mContext
+                    , "com.zarl.techchina.zarlframe.fileProvider"
+                    , apkFile);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+        }
+        mContext.startActivity(intent);
+    }
 
 
     /**
