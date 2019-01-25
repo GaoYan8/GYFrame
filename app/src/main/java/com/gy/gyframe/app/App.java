@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.gy.gyframe.widget.AlertWindow;
 import com.gy.gyframe.widget.LauncherView;
+import com.gy.gylibrary.GYConfig;
 
 
 /**
@@ -33,8 +34,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         _instance = this;
-
-
+        GYConfig.initFileDir(this);
+        GYConfig.initCrashHandlerUtil(this);
     }
 
     public static App getInstance() {

@@ -22,6 +22,8 @@ import com.gy.gyframe.qrcode.QRCodeActivity;
 import com.gy.gyframe.rationale.InstallRationale;
 import com.gy.gyframe.rationale.OverlayRationale;
 import com.gy.gyframe.rationale.RuntimeRationale;
+import com.gy.gylibrary.badgeview.Badge;
+import com.gy.gylibrary.badgeview.QBadgeView;
 import com.gy.gylibrary.image.ImageLoaderUtils;
 import com.gy.gylibrary.lpopupmenu.MenuItem;
 import com.gy.gylibrary.lpopupmenu.TopRightMenu;
@@ -42,6 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+    private   List a;
 
     //确认退出app
     private LARBAlertDialog exitDialog;
@@ -59,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bt_qrCode)
     Button bt_qrCode;
 
+
+    private QBadgeView qBadgeView;
+
+
     @OnClick({
             R.id.bt_quanxian,
             R.id.bt_qrCode
@@ -67,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.bt_quanxian:
 
-                requestPermission(Permission.CAMERA);
+                a.size();
+                //requestPermission(Permission.CAMERA);
                 break;
             case R.id.bt_qrCode:
                 startActivity(new Intent(this, QRCodeActivity.class));
@@ -154,6 +162,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).setTitleTextColor(0, 0, R.color.colorAccent);
 
+
+
+        qBadgeView = new QBadgeView(this);
+        qBadgeView.bindTarget(bt_quanxian);
+        qBadgeView.setBadgeText("");
+        qBadgeView.setGravityOffset(0, 12, true);
+        qBadgeView.setOnDragStateChangedListener(new Badge.OnDragStateChangedListener() {
+            @Override
+            public void onDragStateChanged(int dragState, Badge badge, View targetView) {
+
+            }
+        });
 
     }
 

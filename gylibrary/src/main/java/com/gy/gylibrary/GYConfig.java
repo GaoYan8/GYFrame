@@ -1,7 +1,9 @@
 package com.gy.gylibrary;
 
 import android.app.Application;
+import android.content.Context;
 
+import com.gy.gylibrary.exception.CrashHandlerUtil;
 import com.gy.gylibrary.http.HttpConfig;
 import com.gy.gylibrary.http.okhttp.OkHttpUtils;
 import com.gy.gylibrary.http.okhttp.cookie.CookieJarImpl;
@@ -29,6 +31,7 @@ public class GYConfig {
 
     /**
      * 文件初始化
+     *
      * @param mApplication
      */
     public static void initFileDir(Application mApplication) {
@@ -46,6 +49,18 @@ public class GYConfig {
                 .readTimeout(HttpConfig.readTimeout, TimeUnit.MILLISECONDS)
                 .cookieJar(new CookieJarImpl(new MemoryCookieStore()))
                 .build());
+    }
+
+    /**
+     * 异常捕捉
+     * @param context
+     */
+    public static void initCrashHandlerUtil(Context context) {
+        if (null != context) {
+            CrashHandlerUtil crashHandlerUtil = CrashHandlerUtil.getInstance();
+            crashHandlerUtil.init(context);
+            crashHandlerUtil.setCrashTip("很抱歉，程序出现异常，即将退出！");
+        }
     }
 }
 

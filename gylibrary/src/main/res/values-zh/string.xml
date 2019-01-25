@@ -16,6 +16,7 @@
 -->
 <resources>
     <string name="app_name">GYLibrary</string>
+    <string name="internet_error">网络异常,请检查网络设置</string>
 
     <!--permissions-->
     <string name="permission_name_calendar">日历</string>
