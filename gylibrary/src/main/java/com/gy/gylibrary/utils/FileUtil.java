@@ -1139,6 +1139,9 @@ public class FileUtil {
      * @return
      */
     public static int getFileType(String filename) {
+        if(StringUtils.isEmpty(filename)){
+            filename = "";
+        }
         if (filename.endsWith(".xls") || filename.endsWith(".xlsx")) {
             return FileType.EXCEL;
         } else if (filename.endsWith(".pdf")) {

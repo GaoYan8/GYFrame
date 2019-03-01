@@ -37,10 +37,7 @@ import java.util.Map;
  * crashHandlerUtil.setCrashTip("很抱歉，程序出现异常，即将退出！");
  * }
  * }
- * Created by Administrator
- * on 2016/5/19.
- * 微信公众号：吴小龙同学
- * 个人博客：http://wuxiaolong.me/
+ * 高炎
  */
 public class CrashHandlerUtil implements Thread.UncaughtExceptionHandler {
 
@@ -204,7 +201,7 @@ public class CrashHandlerUtil implements Thread.UncaughtExceptionHandler {
         try {
             long timestamp = System.currentTimeMillis();
             String time = formatter.format(new Date());
-            String fileName =  "crash-" + time + "-" + timestamp + ".log";
+            String fileName = "crash-" + time + "-" + timestamp + ".log";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String path = FileUtil.getFileDownloadDir(mContext) + "/crash/";
                 LogUtils.d("path=" + path);
