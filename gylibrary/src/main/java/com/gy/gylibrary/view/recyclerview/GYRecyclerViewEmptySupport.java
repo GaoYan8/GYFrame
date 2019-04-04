@@ -1,4 +1,4 @@
-package com.gy.gylibrary.view;
+package com.gy.gylibrary.view.recyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
