@@ -43,8 +43,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.gy.gyframe.Main1Activity.FLAG_GUIDE_DICTIONARY_BOUNCE_EFFACT;
+
 public class MainActivity extends AppCompatActivity {
-    private   List a;
+    private List a;
 
     //确认退出app
     private LARBAlertDialog exitDialog;
@@ -62,23 +64,35 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bt_qrCode)
     Button bt_qrCode;
 
+    @BindView(R.id.bt_agentweb)
+    Button bt_agentweb;
+
 
     private QBadgeView qBadgeView;
 
 
     @OnClick({
             R.id.bt_quanxian,
-            R.id.bt_qrCode
+            R.id.bt_qrCode,
+            R.id.bt_agentweb
     })
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_quanxian:
 
                 a.size();
+
                 //requestPermission(Permission.CAMERA);
                 break;
             case R.id.bt_qrCode:
                 startActivity(new Intent(this, QRCodeActivity.class));
+                break;
+
+            case R.id.bt_agentweb:
+                //startActivity(new Intent(this, CommonActivity.class).putExtra(CommonActivity.TYPE_KEY, FLAG_GUIDE_DICTIONARY_BOUNCE_EFFACT));
+
+
+                startActivity(new Intent(this, Main1Activity.class));
                 break;
         }
     }
@@ -161,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                     }
                 }).setTitleTextColor(0, 0, R.color.colorAccent);
-
 
 
         qBadgeView = new QBadgeView(this);

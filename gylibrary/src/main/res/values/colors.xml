@@ -26,7 +26,10 @@
     <color name="defaultColor">#ffffff</color>
 
 
-
+    <!-- agentWeb -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="select_color">#2e2e32</color>
 
 
 </resources>

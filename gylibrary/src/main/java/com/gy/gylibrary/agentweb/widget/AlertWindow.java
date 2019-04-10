@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gy.gyframe.widget;
+package com.gy.gylibrary.agentweb.widget;
 
 import android.content.Context;
 import android.graphics.PixelFormat;

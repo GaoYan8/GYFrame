@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gy.gyframe.widget;
+package com.gy.gylibrary.agentweb.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.gy.gyframe.R;
+import com.gy.gylibrary.R;
+
 
 /**
  * Created by YanZhenjie on 2018/5/30.
@@ -46,12 +47,9 @@ public class LauncherView extends RelativeLayout implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id) {
-            case R.id.btn_cancel: {
-                if (mCancelClickListener != null) {
-                    mCancelClickListener.onClick(v);
-                }
-                break;
+        if (id == R.id.btn_cancel) {
+            if (mCancelClickListener != null) {
+                mCancelClickListener.onClick(v);
             }
         }
     }

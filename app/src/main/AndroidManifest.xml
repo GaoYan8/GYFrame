@@ -42,7 +42,10 @@
 
         <activity android:name=".qrcode.QRCodeActivity" />
 
-
+        
+        <activity android:name=".CommonActivity"/>
+        <activity android:name=".WebActivity"/>
+        <activity android:name=".Main1Activity"/>
     </application>
 
 </manifest>

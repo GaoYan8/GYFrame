@@ -18,9 +18,9 @@ package com.gy.gyframe.app;
 import android.app.Application;
 import android.view.View;
 
-import com.gy.gyframe.widget.AlertWindow;
-import com.gy.gyframe.widget.LauncherView;
 import com.gy.gylibrary.GYConfig;
+import com.gy.gylibrary.agentweb.widget.AlertWindow;
+import com.gy.gylibrary.agentweb.widget.LauncherView;
 
 
 /**
