@@ -7,9 +7,7 @@ import android.support.v4.view.NestedScrollingParentHelper;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 /**
  * 嵌套滑动机制父View
@@ -20,8 +18,8 @@ import android.widget.TextView;
  */
 
 public class MyNestedScrollParent extends LinearLayout implements NestedScrollingParent {
-    private ImageView img;
-    private TextView tv;
+    private View img;
+    private View tv;
     private MyNestedScrollChild myNestedScrollChild;
     private NestedScrollingParentHelper mNestedScrollingParentHelper;
     private int imgHeight;
@@ -44,8 +42,8 @@ public class MyNestedScrollParent extends LinearLayout implements NestedScrollin
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onFinishInflate() {
-        img = (ImageView) getChildAt(0);
-        tv = (TextView) getChildAt(1);
+        img =  getChildAt(0);
+        tv =  getChildAt(1);
         myNestedScrollChild = (MyNestedScrollChild) getChildAt(2);
         img.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
