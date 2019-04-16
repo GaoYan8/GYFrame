@@ -6,14 +6,11 @@ group='com.github.GaoYan8'
 //https://jitpack.io/
 android {
     compileSdkVersion 28
-
-
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 14
-        versionName "1.4.6"
+        versionCode 15
+        versionName "1.4.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
