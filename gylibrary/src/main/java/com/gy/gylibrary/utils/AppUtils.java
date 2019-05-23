@@ -331,7 +331,7 @@ public class AppUtils {
             {"", "*/*"}
     };
 
-    private String getMIMEType(File file) {
+    private static String getMIMEType(File file) {
 
         String type = "*/*";
         String fName = file.getName();
@@ -351,7 +351,7 @@ public class AppUtils {
         return type;
     }
 
-    public void openAndroidFile(Context mContext, File file) {
+    public static void openAndroidFile(Context mContext, File file) {
         Intent intent = new Intent();
         // 这是比较流氓的方法，绕过7.0的文件权限检查
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
