@@ -17,6 +17,9 @@ import java.util.Map;
 
 import okhttp3.CookieJar;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class HttpManager {
     /**
@@ -201,6 +204,21 @@ public class HttpManager {
         }
         // 发起请求，通过回调方法返回值
         call.execute(callBack);
+    }
+
+
+    //使用DELETE方式向服务器提交数据并获取返回提示数据
+    public static void requestDelete(String url, okhttp3.Callback callback) {
+        //JSONObject这里是要提交的数据部分
+        Request request = new Request.Builder().url(url).delete().build();
+        new OkHttpClient().newCall(request).enqueue(callback);
+    }
+
+    //使用PUT方式向服务器提交数据并获取返回提示数据
+    public static void requestPUT(String url, RequestBody requestBody, okhttp3.Callback callback) {
+        //JSONObject这里是要提交的数据部分
+        Request request = new Request.Builder().url(url).put(requestBody).build();
+        new OkHttpClient().newCall(request).enqueue(callback);
     }
 
     /**
