@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.gy.gylibrary.http.builder.RequestParams;
 import com.gy.gylibrary.http.okhttp.OkHttpUtils;
 import com.gy.gylibrary.http.okhttp.builder.GetBuilder;
+import com.gy.gylibrary.http.okhttp.builder.OtherRequestBuilder;
 import com.gy.gylibrary.http.okhttp.builder.PostFormBuilder;
 import com.gy.gylibrary.http.okhttp.callback.Callback;
 import com.gy.gylibrary.http.okhttp.cookie.CookieJarImpl;
@@ -16,10 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.CookieJar;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 
 public class HttpManager {
     /**
@@ -207,19 +206,131 @@ public class HttpManager {
     }
 
 
-    //使用DELETE方式向服务器提交数据并获取返回提示数据
-    public static void requestDelete(String url, okhttp3.Callback callback) {
-        //JSONObject这里是要提交的数据部分
-        Request request = new Request.Builder().url(url).delete().build();
-        new OkHttpClient().newCall(request).enqueue(callback);
+
+    public void requestPut(String url, RequestParams params, Callback callBack) {
+        requestPut(url, params, callBack, 0, 0, 0);
     }
 
-    //使用PUT方式向服务器提交数据并获取返回提示数据
-    public static void requestPUT(String url, RequestBody requestBody, okhttp3.Callback callback) {
-        //JSONObject这里是要提交的数据部分
-        Request request = new Request.Builder().url(url).put(requestBody).build();
-        new OkHttpClient().newCall(request).enqueue(callback);
+    public void requestPut(String url, RequestParams params, Callback callBack, long connTimeOut, long readTimeOut, long writeTimeOut) {
+        if (params == null) {
+            params = new RequestParams();
+        }
+        OtherRequestBuilder builder = OkHttpUtils.getInstance().put().url(url);
+        // 添加header
+        if (params.getHeaders() != null) {
+            builder = builder.headers(params.getHeaders());
+        }
+        if (params.getBodyParams() != null && params.getBodyParams().size() != 0) {
+            FormBody.Builder fy = new FormBody.Builder();
+            for (Map<String, String> map : params.getBodyParams()) {
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    fy.add(entry.getKey(),entry.getValue());
+
+                }
+            }
+           builder.requestBody(fy.build());
+        }
+
+        // 构建RequestCall
+        RequestCall call = builder.build();
+        // 设置超时时间
+        if (connTimeOut > 0) {
+            call = call.connTimeOut(connTimeOut);
+        }
+        if (readTimeOut > 0) {
+            call = call.readTimeOut(readTimeOut);
+        }
+        if (writeTimeOut > 0) {
+            call = call.writeTimeOut(writeTimeOut);
+        }
+        // 发起请求，通过回调方法返回值
+        call.execute(callBack);
+
     }
+
+    public void requestDelete(String url, RequestParams params, Callback callBack) {
+        requestDelete(url, params, callBack, 0, 0, 0);
+    }
+
+    public void requestDelete(String url, RequestParams params, Callback callBack, long connTimeOut, long readTimeOut, long writeTimeOut) {
+        if (params == null) {
+            params = new RequestParams();
+        }
+        OtherRequestBuilder builder = OkHttpUtils.getInstance().delete().url(url);
+        // 添加header
+        if (params.getHeaders() != null) {
+            builder = builder.headers(params.getHeaders());
+        }
+
+        if (params.getBodyParams() != null && params.getBodyParams().size() != 0) {
+            FormBody.Builder fy = new FormBody.Builder();
+            for (Map<String, String> map : params.getBodyParams()) {
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    fy.add(entry.getKey(),entry.getValue());
+
+                }
+            }
+            builder.requestBody(fy.build());
+        }
+
+        // 构建RequestCall
+        RequestCall call = builder.build();
+        // 设置超时时间
+        if (connTimeOut > 0) {
+            call = call.connTimeOut(connTimeOut);
+        }
+        if (readTimeOut > 0) {
+            call = call.readTimeOut(readTimeOut);
+        }
+        if (writeTimeOut > 0) {
+            call = call.writeTimeOut(writeTimeOut);
+        }
+        // 发起请求，通过回调方法返回值
+        call.execute(callBack);
+
+    }
+
+
+    public void requestPatch(String url, RequestParams params, Callback callBack) {
+        requestPatch(url, params, callBack, 0, 0, 0);
+    }
+    public void requestPatch(String url, RequestParams params, Callback callBack, long connTimeOut, long readTimeOut, long writeTimeOut) {
+        if (params == null) {
+            params = new RequestParams();
+        }
+        OtherRequestBuilder builder = OkHttpUtils.getInstance().patch().url(url);
+        // 添加header
+        if (params.getHeaders() != null) {
+            builder = builder.headers(params.getHeaders());
+        }
+
+        if (params.getBodyParams() != null && params.getBodyParams().size() != 0) {
+            FormBody.Builder fy = new FormBody.Builder();
+            for (Map<String, String> map : params.getBodyParams()) {
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    fy.add(entry.getKey(),entry.getValue());
+
+                }
+            }
+            builder.requestBody(fy.build());
+        }
+
+        // 构建RequestCall
+        RequestCall call = builder.build();
+        // 设置超时时间
+        if (connTimeOut > 0) {
+            call = call.connTimeOut(connTimeOut);
+        }
+        if (readTimeOut > 0) {
+            call = call.readTimeOut(readTimeOut);
+        }
+        if (writeTimeOut > 0) {
+            call = call.writeTimeOut(writeTimeOut);
+        }
+        // 发起请求，通过回调方法返回值
+        call.execute(callBack);
+    }
+
 
     /**
      * @param url

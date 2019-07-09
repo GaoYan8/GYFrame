@@ -119,6 +119,10 @@ public class GYRatingBar extends LinearLayout {
         this.starImageSize = starImageSize;
     }
 
+    /**
+     * 每次点击星星所增加的量是整个还是半个
+     * @param stepSize
+     */
     public void setStepSize(StepSize stepSize) {
         this.stepSize = stepSize;
     }

@@ -24,6 +24,10 @@ import com.gy.gyframe.rationale.OverlayRationale;
 import com.gy.gyframe.rationale.RuntimeRationale;
 import com.gy.gylibrary.badgeview.Badge;
 import com.gy.gylibrary.badgeview.QBadgeView;
+import com.gy.gylibrary.http.HttpConfig;
+import com.gy.gylibrary.http.HttpManager;
+import com.gy.gylibrary.http.builder.RequestParams;
+import com.gy.gylibrary.http.okhttp.callback.StringCallback;
 import com.gy.gylibrary.image.ImageLoaderUtils;
 import com.gy.gylibrary.lpopupmenu.MenuItem;
 import com.gy.gylibrary.lpopupmenu.TopRightMenu;
@@ -33,6 +37,7 @@ import com.gy.gylibrary.permission.Permission;
 import com.gy.gylibrary.permission.Rationale;
 import com.gy.gylibrary.permission.RequestExecutor;
 import com.gy.gylibrary.permission.Setting;
+import com.gy.gylibrary.utils.LogUtils;
 import com.gy.gylibrary.view.LARBAlertDialog;
 
 import java.io.File;
@@ -42,8 +47,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
-import static com.gy.gyframe.Main1Activity.FLAG_GUIDE_DICTIONARY_BOUNCE_EFFACT;
 
 public class MainActivity extends AppCompatActivity {
     private List a;
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @OnClick({
+            R.id.iv_img,
             R.id.bt_quanxian,
             R.id.bt_qrCode,
             R.id.bt_agentweb
@@ -90,9 +96,26 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.bt_agentweb:
                 //startActivity(new Intent(this, CommonActivity.class).putExtra(CommonActivity.TYPE_KEY, FLAG_GUIDE_DICTIONARY_BOUNCE_EFFACT));
-
-
                 startActivity(new Intent(this, Main1Activity.class));
+                break;
+            case R.id.iv_img:
+
+                RequestParams params = new RequestParams();
+
+                params.addHeader("a","aaaaaaa");
+                HttpManager.getInstance().requestPut("http://10.10.20.16:8085/v2/test", params, new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        LogUtils.e(HttpConfig.OK_HTTP_TAG, "服务器返回异常信息：" + e.getMessage());
+                    }
+
+
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        LogUtils.e(HttpConfig.OK_HTTP_TAG, "get 网络返回数据:  " + response);
+                    }
+                });
                 break;
         }
     }
