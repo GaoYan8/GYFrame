@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gy.gyframe.activity.OkhttpActivity;
 import com.gy.gyframe.qrcode.QRCodeActivity;
 import com.gy.gyframe.rationale.InstallRationale;
 import com.gy.gyframe.rationale.OverlayRationale;
@@ -99,23 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, Main1Activity.class));
                 break;
             case R.id.iv_img:
-
-                RequestParams params = new RequestParams();
-
-                params.addHeader("a","aaaaaaa");
-                HttpManager.getInstance().requestPut("http://10.10.20.16:8085/v2/test", params, new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        LogUtils.e(HttpConfig.OK_HTTP_TAG, "服务器返回异常信息：" + e.getMessage());
-                    }
-
-
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        LogUtils.e(HttpConfig.OK_HTTP_TAG, "get 网络返回数据:  " + response);
-                    }
-                });
+                startActivity(new Intent(this, OkhttpActivity.class));
                 break;
         }
     }

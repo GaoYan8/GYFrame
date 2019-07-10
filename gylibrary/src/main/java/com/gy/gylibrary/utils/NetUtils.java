@@ -185,7 +185,7 @@ public class NetUtils {
         if (!isNetworkAvailable(context)) {
             //TODO: 刚启动app Snackbar不起作用，延迟显示也不好使，这是why？
             //Toast.makeText(BaseApplication.getBaseApplication(), BaseApplication.getBaseApplication().getString(R.string.internet_error), Toast.LENGTH_SHORT).show();
-            ToastUtils.showToast(context, context.getString(R.string.internet_error));
+            ToastUtils.show(context, context.getString(R.string.internet_error));
             return true;
         }
         return false;

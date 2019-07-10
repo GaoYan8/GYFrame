@@ -16,4 +16,10 @@
     <string name="message_install_failed">Your phone is not allowed us to install apps.</string>
 
     <string name="message_error_storage">Please check the external storage device.</string>
+
+
+    <string name="ok_notifyTitle">提示</string>
+    <string name="ok_notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="ok_setting">设置</string>
+    <string name="ok_cancel">取消</string>
 </resources>

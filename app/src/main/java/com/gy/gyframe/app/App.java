@@ -16,11 +16,25 @@
 package com.gy.gyframe.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import com.gy.gylibrary.GYConfig;
 import com.gy.gylibrary.agentweb.widget.AlertWindow;
 import com.gy.gylibrary.agentweb.widget.LauncherView;
+import com.gy.gylibrary.okhttplib.OkHttpUtil;
+import com.gy.gylibrary.okhttplib.annotation.CacheType;
+import com.gy.gylibrary.okhttplib.annotation.Encoding;
+import com.gy.gylibrary.okhttplib.config.HttpConfig;
+import com.gy.gylibrary.okhttplib.cookie.PersistentCookieJar;
+import com.gy.gylibrary.okhttplib.cookie.cache.SetCookieCache;
+import com.gy.gylibrary.okhttplib.cookie.persistence.SharedPrefsCookiePersistor;
+import com.gy.gylibrary.okhttplib.interceptor.impl.DefaultExceptionInterceptor;
+import com.gy.gylibrary.okhttplib.interceptor.impl.DefaultResultInterceptor;
+
+import java.io.File;
 
 
 /**
@@ -36,6 +50,9 @@ public class App extends Application {
         _instance = this;
         GYConfig.initFileDir(this);
         GYConfig.initCrashHandlerUtil(this);
+        GYConfig.initOkHttpClient();
+        GYConfig.initOkHttp3Client(this, new HttpConfig());
+
     }
 
     public static App getInstance() {
@@ -54,4 +71,6 @@ public class App extends Application {
         alertWindow.setContentView(view);
         alertWindow.show();
     }
+
+
 }

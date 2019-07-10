@@ -69,6 +69,11 @@ public class FileUtil {
     private static String cacheDownloadDir = null;
 
     /**
+     * 网络请求缓存目录.
+     */
+    private static String httpCacheDir = null;
+
+    /**
      * 默认下载数据库文件的目录.
      */
     private static String dbDownloadDir = null;
@@ -83,11 +88,6 @@ public class FileUtil {
      * 剩余空间大于200M才使用SD缓存.
      */
     private static int freeSdSpaceNeededToCache = 200 * 1024 * 1024;
-
-    /**
-     * 默认下载文件地址.
-     */
-    //private static String DOWNLOAD_ROOT_DIR = "download";
 
     /**
      * 默认下载图片文件地址.
@@ -109,6 +109,12 @@ public class FileUtil {
      * APP缓存目录.
      */
     private static String CACHE_DIR = "cache";
+
+
+    /**
+     * APP缓存目录.
+     */
+    private static String HTTP_FILE_DIR = "http";
 
     /**
      * DB目录.
@@ -152,6 +158,11 @@ public class FileUtil {
         String cacheDownloadPath = downloadRootPath + CACHE_DIR
                 + File.separator;
 
+        // 网络缓存目录.
+        String httpCachePath = downloadRootPath + HTTP_FILE_DIR
+                + File.separator;
+
+
         // 默认DB目录.
         String dbDownloadPath = downloadRootPath + DB_DIR + File.separator;
 
@@ -174,6 +185,13 @@ public class FileUtil {
                     cacheDownloadDirFile.mkdirs();
                 }
                 cacheDownloadDir = cacheDownloadDirFile.getPath();
+
+                // http缓存路径
+                File httpCacheDirFile = new File(root.getAbsolutePath() + httpCachePath);
+                if (!httpCacheDirFile.exists()) {
+                    httpCacheDirFile.mkdirs();
+                }
+                httpCacheDir = httpCacheDirFile.getPath();
 
                 File imageDownloadDirFile = new File(root.getAbsolutePath()
                         + imageDownloadPath);
@@ -863,6 +881,19 @@ public class FileUtil {
             initFileDir(context);
         }
         return dbDownloadDir;
+    }
+
+    /**
+     * Gets the db download dir.
+     *
+     * @param context the context
+     * @return the db download dir
+     */
+    public static String getHttpCacheDir(Context context) {
+        if (downloadRootDir == null) {
+            initFileDir(context);
+        }
+        return httpCacheDir;
     }
 
     /**

@@ -20,6 +20,12 @@ import okhttp3.CookieJar;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 
+/**
+ * 网络请求
+ * @author 高炎
+ * 该接口已过时，请使用com.gy.gylibrary.okhttplib.OkHttpUtil
+ */
+@Deprecated
 public class HttpManager {
     /**
      * 单例模式，实例化HttpManager对象

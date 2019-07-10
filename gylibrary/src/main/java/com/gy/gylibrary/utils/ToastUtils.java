@@ -2,12 +2,15 @@ package com.gy.gylibrary.utils;
 
 import android.content.Context;
 import android.os.Handler;
-import android.os.Looper;
+import android.support.annotation.IntDef;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
  * <p>
- * Toast 显示。
+ * Toast辅助类，避免重复显示
  * <p>
  * <p>
  * 创建日期 2016年5月16日<br>
@@ -17,70 +20,98 @@ import android.widget.Toast;
  */
 public class ToastUtils {
     private static Toast mToast;
-    private static Handler mhandler = new Handler(Looper.getMainLooper());
-    private static Runnable r = new Runnable() {
-        public void run() {
-            mToast.cancel();
-        }
 
-        ;
+    private static Handler mHandler = new Handler();
+
+    private static Runnable runnable = new Runnable() {
+        public void run() {
+            if(mToast != null) {
+                mToast.cancel();
+                mToast = null;
+            }
+        }
     };
 
+    @IntDef({Toast.LENGTH_SHORT, Toast.LENGTH_LONG})
+    public @interface Duration {}
+
+
     /**
-     * 自定义
-     *
-     * @param context
-     * @param text
-     * @param duration
+     * Toast显示
+     * @param context 上下文
+     * @param text 显示内容
      */
-    public static void showToast(Context context, String text, int duration) {
-        mhandler.removeCallbacks(r);
-        if (null != mToast) {
-            mToast.setText(text);
-        } else {
-            mToast = Toast.makeText(context, text, duration);
+    public static void show(Context context, String text) {
+        show(context, text, null);
+    }
+
+    /**
+     * Toast显示
+     * @param context 上下文
+     * @param resId 显示内容资源
+     */
+    public static void show(Context context, int resId) {
+        show(context, context.getResources().getString(resId), null);
+    }
+
+    /**
+     * Toast显示:可以控制显示时间
+     * @param context 上下文
+     * @param resId 显示内容资源
+     * @param duration 显示时间
+     */
+    public static void show(Context context, int resId, int duration) {
+        show(context, context.getResources().getString(resId), duration);
+    }
+
+
+    /**
+     * Toast显示:可以控制显示时间
+     * @param context 上下文
+     * @param text 显示内容
+     * @param duration 显示时间
+     */
+    public static void show(Context context,String text,@Duration Integer duration){
+        final int myDuration = (duration==null)?Toast.LENGTH_SHORT:duration;
+        if (mToast != null) {
+            mToast.cancel();
         }
-        mhandler.postDelayed(r, 2000);
+        mToast = Toast.makeText(context, text, myDuration);
+        mHandler.removeCallbacks(runnable);
+        int delayMillis = (myDuration==Toast.LENGTH_SHORT)?2000:3000;
+        mHandler.postDelayed(runnable, delayMillis);
         mToast.show();
     }
 
     /**
-     * 显示 文本 显示 资源   默认Toast.LENGTH_SHORT
-     *
-     * @param context
-     * @param msg
+     * Toast显示:可以显示图片等控件
+     * @param context 上下文
+     * @param text 显示内容
+     * @param view 图片View
      */
-    public static void showToast(Context context, String msg) {
-        showToast(context, msg, Toast.LENGTH_SHORT);
+    public static void showWithView(Context context, String text, View view){
+        showWithView(context,text,null,view);
     }
 
     /**
-     * 显示 资源   默认Toast.LENGTH_SHORT
-     *
-     * @param context
-     * @param msgId
+     * Toast显示:可以显示图片等控件、控制显示时间
+     * @param context 上下文
+     * @param text 显示内容
+     * @param duration 显示时间
+     * @param view 图片View
      */
-    public static void showToast(Context context, int msgId) {
-        showToast(context, context.getString(msgId), Toast.LENGTH_SHORT);
-    }
-
-    /**
-     * 显示 文本 显示 资源   默认Toast.LENGTH_SHORT
-     *
-     * @param context
-     * @param msg
-     */
-    public static void showToastL(Context context, String msg) {
-        showToast(context, msg, Toast.LENGTH_LONG);
-    }
-
-    /**
-     * 显示 资源   默认Toast.LENGTH_SHORT
-     *
-     * @param context
-     * @param msgId
-     */
-    public static void showToastL(Context context, int msgId) {
-        showToast(context, context.getString(msgId), Toast.LENGTH_LONG);
+    public static void showWithView(Context context,String text,@Duration Integer duration,View view){
+        final int myDuration = (duration==null)?Toast.LENGTH_SHORT:duration;
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(context, text, myDuration);
+        mToast.setGravity(Gravity.CENTER, 0, 0);
+        LinearLayout toastView = (LinearLayout) mToast.getView();
+        toastView.addView(view);
+        mHandler.removeCallbacks(runnable);
+        int delayMillis = (myDuration==Toast.LENGTH_SHORT)?2000:3000;
+        mHandler.postDelayed(runnable, delayMillis);
+        mToast.show();
     }
 }
