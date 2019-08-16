@@ -51,6 +51,7 @@ public class GYConfig {
 
     /**
      * 初始化网络请求实例
+     * 该接口已过时，请使用initOkHttp3Client
      */
     @Deprecated
     public static void initOkHttpClient() {
@@ -77,7 +78,6 @@ public class GYConfig {
     /**
      * 初始化网络请求框架
      * 需要先初始化 initFileDir()
-     * 该接口已过时，请使用initOkHttp3Client
      */
     public static void initOkHttp3Client(Context context, HttpConfig httpConfig) {
         OkHttpUtil.init(context)
