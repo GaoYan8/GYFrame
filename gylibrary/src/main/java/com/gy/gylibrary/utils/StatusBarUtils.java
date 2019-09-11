@@ -14,6 +14,11 @@ import android.widget.Toolbar;
 import java.lang.reflect.Field;
 
 
+/**
+ *
+ * 该接口已过时，请使用initOkHttp3Client
+ */
+@Deprecated
 public class StatusBarUtils {
     private static final int DEFAULT_STATUS_BAR_ALPHA = 0;
 

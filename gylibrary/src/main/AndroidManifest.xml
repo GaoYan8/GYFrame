@@ -28,13 +28,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-    <application android:theme="@style/AppTheme">
+    <application>
         <!-- 权限 -->
         <activity
             android:name=".permission.PermissionActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="standard"
-            android:theme="@style/Permission.Theme.Activity"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 
         <provider
