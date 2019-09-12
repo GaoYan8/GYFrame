@@ -48,12 +48,12 @@ public class DisplayMetricsUtil {
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      *
      * @param context 上下文
-     * @param dpValue 值
+     * @param dipValue 值
      * @return 转换结果
      */
-    public static int dip2px(Context context, float dpValue) {
+    public static int dp2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
+        return (int) (dipValue * scale + 0.5f);
     }
 
     /**
