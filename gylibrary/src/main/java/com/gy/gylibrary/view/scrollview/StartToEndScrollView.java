@@ -1,4 +1,4 @@
-package com.gy.gylibrary.view;
+package com.gy.gylibrary.view.scrollview;
 
 import android.content.Context;
 import android.os.Handler;
@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.ScrollView;
 
 /**
- *  监听ScrollView滚动到顶部或者底部做相关事件拦截
+ *  监听ScrollView滚动到顶部或者底部 触发事件
  * @author 高炎
  * @email yan.gao@zarltech.com
  * @create 2019/8/16
  * @Describe
  */
-public class GYScrollView  extends ScrollView {
+public class StartToEndScrollView extends ScrollView {
     //回调监听接口
     private OnScrollChangeListener mOnScrollChangeListener;
     //标识是否滑动到顶部
@@ -43,14 +43,14 @@ public class GYScrollView  extends ScrollView {
             }
         }
     };
-    public GYScrollView(Context context) {
+    public StartToEndScrollView(Context context) {
         super(context);
     }
-    public GYScrollView(Context context, AttributeSet attrs) {
+    public StartToEndScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public GYScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public StartToEndScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

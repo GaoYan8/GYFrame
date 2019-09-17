@@ -5,6 +5,10 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
+ *
+ * 不推荐使用<br/>
+ *
+ *
  * 解决ScrollView嵌套ListView，ListView显示不全的问题
  * 注意：ScrollView嵌套ListView时，如果ListView很长超出了屏幕的高度，
  * 那么ScrollView会自动滚动到ListView的顶部，
@@ -18,6 +22,7 @@ import android.widget.ListView;
  * @create 2019/6/29
  * @Describe
  */
+@Deprecated
 public class GYScrollListView extends ListView {
     public GYScrollListView(Context context) {
         super(context);
