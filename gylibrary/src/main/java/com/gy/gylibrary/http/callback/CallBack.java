@@ -1,5 +1,7 @@
 package com.gy.gylibrary.http.callback;
 
+import com.gy.gylibrary.http.constant.entity.ErrorMeg;
+
 import java.lang.reflect.ParameterizedType;
 
 /**
@@ -25,5 +27,5 @@ public abstract class CallBack<T> {
     /**
      * 失败的回调
      */
-    public abstract void onFailure(Exception e, String message, int errorType);
+    public abstract void onFailure(Exception e, ErrorMeg errorMeg);
 }

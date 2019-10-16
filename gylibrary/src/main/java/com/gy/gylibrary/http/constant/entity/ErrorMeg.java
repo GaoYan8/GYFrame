@@ -9,21 +9,18 @@ import java.io.Serializable;
  * @Describe
  */
 public class ErrorMeg implements Serializable {
-
-    public ErrorMeg() {
-
-    }
-
-    public ErrorMeg(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
-
     private int code;
     private String msg;
     private int status;
 
+
+    public ErrorMeg() {
+
+    }
+    public ErrorMeg(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
     public int getCode() {
         return code;
     }
