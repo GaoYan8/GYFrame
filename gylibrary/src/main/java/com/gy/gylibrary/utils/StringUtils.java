@@ -3,6 +3,8 @@
  */
 package com.gy.gylibrary.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.regex.Pattern;
 
 /**
@@ -84,4 +86,35 @@ public class StringUtils {
         }
         return content;
     }
+
+
+    /**
+     * 字符串URLEncode 编码
+     *
+     * @param s
+     * @param enc
+     * @return
+     */
+    public static String urlEncode(String s, String enc) {
+        if (StringUtils.isEmpty(s)) {
+            return s;
+        }
+        try {
+            return URLEncoder.encode(s, enc);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    /**
+     * 字符串URLEncode UTF-8 编码
+     *
+     * @param s
+     * @return
+     */
+    public static String urlEncode(String s) {
+        return urlEncode(s, "UTF-8");
+    }
+
 }
