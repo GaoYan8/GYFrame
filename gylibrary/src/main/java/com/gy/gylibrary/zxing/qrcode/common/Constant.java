@@ -29,7 +29,7 @@ public class Constant {
     /**
      *  请求CODE
      */
-    public final static int REQUEST_CODE_SCAN = 19921117;
+    public final static int REQUEST_CODE_SCAN = 2015;
 
 
 }
