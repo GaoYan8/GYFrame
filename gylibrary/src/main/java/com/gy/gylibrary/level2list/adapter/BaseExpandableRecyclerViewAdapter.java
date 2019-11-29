@@ -47,7 +47,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
     private static final int TYPE_MASK = TYPE_GROUP | TYPE_CHILD | TYPE_EMPTY | TYPE_HEADER;
 
     private Set<GroupBean> mExpandGroupSet;
-    private ExpandableRecyclerViewOnClickListener<GroupBean, ChildBean> mListener;
+    private ExpandableRecyclerViewOnClickListener<GroupBean, ChildBean, GroupViewHolder, ChildViewHolder> mListener;
 
     private boolean mIsEmpty;
     private boolean mShowHeaderViewWhenEmpty;
@@ -173,7 +173,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
         }
     }
 
-    public final void setListener(ExpandableRecyclerViewOnClickListener<GroupBean, ChildBean> listener) {
+    public final void setListener(ExpandableRecyclerViewOnClickListener<GroupBean, ChildBean, GroupViewHolder, ChildViewHolder> listener) {
         mListener = listener;
     }
 
@@ -321,10 +321,10 @@ public abstract class BaseExpandableRecyclerViewAdapter
             case TYPE_CHILD:
                 final int[] childCoord = translateToDoubleIndex(position);
                 GroupBean groupBean = getGroupItem(childCoord[0]);
-                bindChildViewHolder((ChildViewHolder) holder, groupBean, groupBean.getChildAt(childCoord[1]),position, payloads);
+                bindChildViewHolder((ChildViewHolder) holder, groupBean, groupBean.getChildAt(childCoord[1]), position, payloads);
                 break;
             case TYPE_GROUP:
-                bindGroupViewHolder((GroupViewHolder) holder, getGroupItem(translateToDoubleIndex(position)[0]), position,payloads);
+                bindGroupViewHolder((GroupViewHolder) holder, getGroupItem(translateToDoubleIndex(position)[0]), position, payloads);
                 break;
             default:
                 throw new IllegalStateException(
@@ -347,7 +347,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
             @Override
             public boolean onLongClick(View v) {
                 if (mListener != null) {
-                    return mListener.onGroupLongClicked(groupBean,position);
+                    return mListener.onGroupLongClicked(holder, groupBean, position);
                 }
                 return false;
             }
@@ -357,7 +357,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
                 @Override
                 public void onClick(View v) {
                     if (mListener != null) {
-                        mListener.onGroupClicked(groupBean,position);
+                        mListener.onGroupClicked(holder, groupBean, position);
                     }
                 }
             });
@@ -366,7 +366,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
                 @Override
                 public void onClick(View v) {
                     final boolean isExpand = mExpandGroupSet.contains(groupBean);
-                    if (mListener == null || !mListener.onInterceptGroupExpandEvent(groupBean, isExpand)) {
+                    if (mListener == null || !mListener.onInterceptGroupExpandEvent(holder, groupBean, isExpand)) {
                         final int adapterPosition = holder.getAdapterPosition();
                         holder.onExpandStatusChanged(BaseExpandableRecyclerViewAdapter.this, !isExpand);
                         if (isExpand) {
@@ -383,13 +383,13 @@ public abstract class BaseExpandableRecyclerViewAdapter
         onBindGroupViewHolder(holder, groupBean, isGroupExpanding(groupBean));
     }
 
-    protected void bindChildViewHolder(ChildViewHolder holder, final GroupBean groupBean, final ChildBean childBean, final int position, List<Object> payload) {
+    protected void bindChildViewHolder(final ChildViewHolder holder, final GroupBean groupBean, final ChildBean childBean, final int position, List<Object> payload) {
         onBindChildViewHolder(holder, groupBean, childBean, payload);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onChildClicked(groupBean, childBean,position);
+                    mListener.onChildClicked(holder, groupBean, childBean, position);
                 }
             }
         });
@@ -475,7 +475,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
     }
 
 
-    public interface ExpandableRecyclerViewOnClickListener<GroupBean extends BaseGroupBean, ChildBean> {
+    public interface ExpandableRecyclerViewOnClickListener<GroupBean extends BaseGroupBean, ChildBean, GroupViewHolder extends BaseGroupViewHolder, ChildViewHolder extends RecyclerView.ViewHolder> {
 
         /**
          * called when group item is long clicked
@@ -484,7 +484,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
          * @param position
          * @return
          */
-        boolean onGroupLongClicked(GroupBean groupItem, int position);
+        boolean onGroupLongClicked(GroupViewHolder holder, GroupBean groupItem, int position);
 
         /**
          * called when an expandable group item is clicked
@@ -493,7 +493,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
          * @param isExpand
          * @return whether intercept the click event
          */
-        boolean onInterceptGroupExpandEvent(GroupBean groupItem, boolean isExpand);
+        boolean onInterceptGroupExpandEvent(GroupViewHolder holder, GroupBean groupItem, boolean isExpand);
 
         /**
          * called when an unexpandable group item is clicked
@@ -501,7 +501,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
          * @param groupItem
          * @param position
          */
-        void onGroupClicked(GroupBean groupItem, int position);
+        void onGroupClicked(GroupViewHolder holder, GroupBean groupItem, int position);
 
         /**
          * called when child is clicked
@@ -510,7 +510,7 @@ public abstract class BaseExpandableRecyclerViewAdapter
          * @param childItem
          * @param position
          */
-        void onChildClicked(GroupBean groupItem, ChildBean childItem, int position);
+        void onChildClicked(ChildViewHolder holder, GroupBean groupItem, ChildBean childItem, int position);
     }
 }
 
