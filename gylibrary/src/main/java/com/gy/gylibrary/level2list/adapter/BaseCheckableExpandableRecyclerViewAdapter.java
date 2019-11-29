@@ -135,8 +135,8 @@ public abstract class BaseCheckableExpandableRecyclerViewAdapter
     }
 
     @Override
-    protected void bindChildViewHolder(final ChildViewHolder holder, final GroupBean groupBean, final ChildBean childBean, List<Object> payload) {
-        super.bindChildViewHolder(holder, groupBean, childBean, payload);
+    protected void bindChildViewHolder(final ChildViewHolder holder, final GroupBean groupBean, final ChildBean childBean,int position, List<Object> payload) {
+        super.bindChildViewHolder(holder, groupBean, childBean,position, payload);
         holder.setCheckMode(getChildCheckedMode(childBean));
         if (holder.getCheckableRegion() != null) {
             holder.getCheckableRegion().setOnClickListener(new View.OnClickListener() {
