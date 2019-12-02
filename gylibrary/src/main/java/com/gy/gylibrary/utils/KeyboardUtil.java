@@ -29,8 +29,9 @@ public class KeyboardUtil {
 
     /**
      * 如果输入法在窗口上已经显示，则隐藏，反之则显示
+     * @param context
      */
-    public void showOrHide(Context context) {
+    public static void showOrHide(Context context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
