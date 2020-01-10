@@ -551,7 +551,6 @@ public class FileUtil {
     }
 
 
-
     /**
      * 描述：从sd卡中的文件读取到byte[].
      *
@@ -657,7 +656,6 @@ public class FileUtil {
         }
         return false;
     }
-
 
 
     /**
@@ -1018,7 +1016,7 @@ public class FileUtil {
         }
         long dirSize = 0;
         File[] files = dir.listFiles();
-        if(null != files) {
+        if (null != files) {
             for (File file : files) {
                 if (file.isFile()) {
                     dirSize += file.length();
@@ -1170,7 +1168,7 @@ public class FileUtil {
      * @return
      */
     public static int getFileType(String filename) {
-        if(StringUtils.isEmpty(filename)){
+        if (StringUtils.isEmpty(filename)) {
             filename = "";
         }
         if (filename.endsWith(".xls") || filename.endsWith(".xlsx")) {
@@ -1225,5 +1223,6 @@ public class FileUtil {
         }
         return data;
     }
+
 
 }

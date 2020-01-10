@@ -2,13 +2,17 @@ package com.gy.gylibrary.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.gy.gylibrary.R;
 
 
@@ -88,8 +92,6 @@ public class ImageLoaderUtils {
     }
 
 
-
-
     /**
      * 加载gif
      *
@@ -149,5 +151,25 @@ public class ImageLoaderUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.picture_image_placeholder)
                 .into(imageView);
+    }
+
+
+    /**
+     * Drawable加载网络图片
+     *
+     * @param context
+     * @param res
+     * @param imageView
+     */
+    public void loadResDrawableImage(@NonNull final Context context, @NonNull final String res, @NonNull final ImageView imageView) {
+        GlideApp.with(context)
+                .asDrawable()
+                .load(res)
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        imageView.setImageDrawable(resource);
+                    }
+                });
     }
 }
